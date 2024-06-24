@@ -1,0 +1,142 @@
+<!-- Index.html file -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>QR Code Scanner / Reader
+    </title>
+    <style>
+        /* style.css file*/
+        body {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            text-align: center;
+            background: rgb(128 0 0 / 66%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 5px;
+        }
+
+        .container h1 {
+            color: #ffffff;
+        }
+
+        .section {
+            background-color: #ffffff;
+            padding: 50px 30px;
+            border: 1.5px solid #b2b2b2;
+            border-radius: 0.25em;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        #my-qr-reader {
+            padding: 20px !important;
+            border: 1.5px solid #b2b2b2 !important;
+            border-radius: 8px;
+        }
+
+        #my-qr-reader img[alt="Info icon"] {
+            display: none;
+        }
+
+        #my-qr-reader img[alt="Camera based scan"] {
+            width: 100px !important;
+            height: 100px !important;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 1px solid #b2b2b2;
+            outline: none;
+            border-radius: 0.25em;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            background-color: #008000ad;
+            transition: 0.3s background-color;
+        }
+
+        button:hover {
+            background-color: #008000;
+        }
+
+        #html5-qrcode-anchor-scan-type-change {
+            text-decoration: none !important;
+            color: #1d9bf0;
+        }
+
+        video {
+            width: 100% !important;
+            border: 1px solid #b2b2b2 !important;
+            border-radius: 0.25em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Qr Code Scanner</h1>
+    <br>
+    <br>
+
+    <main>
+        <div class="section" id="reader"></div>
+        <div id="result"></div>
+    </main>
+
+
+    <script>
+
+        const scanner = new Html5QrcodeScanner('reader', {
+            // Scanner will be initialized in DOM inside element with id of 'reader'
+            qrbox: {
+                width: 500,
+                height: 500,
+            },  // Sets dimensions of scanning box (set relative to reader element width)
+            fps: 20, // Frames per second to attempt a scan
+        });
+
+
+        scanner.render(success, error);
+        // Starts scanner
+
+        function success(result) {
+
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+            // Prints result as a link inside result element
+
+            scanner.clear();
+            // Clears scanning instance
+
+            document.getElementById('reader').remove();
+            // Removes reader element from DOM since no longer needed
+
+        }
+
+        function error(err) {
+            console.error(err);
+            // Prints any errors to the console
+        }
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"
+        integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</body>
+
+</html>
