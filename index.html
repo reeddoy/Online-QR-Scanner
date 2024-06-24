@@ -76,13 +76,20 @@
 
         scanner.render(success, error);
 
+        // function success(result) {
+        //     document.getElementById('result').innerHTML = `
+        //         <h2>Success!</h2>
+        //         <p><a href="${result}" target="_blank">${result}</a></p>
+        //     `;
+        //     scanner.clear();
+        // }
+
+        
         function success(result) {
-            document.getElementById('result').innerHTML = `
-                <h2>Success!</h2>
-                <p><a href="${result}" target="_blank">${result}</a></p>
-            `;
-            scanner.clear();
+        window.location.href = result;
+        scanner.clear();
         }
+
 
         function error(err) {
             console.error(err);
